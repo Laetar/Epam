@@ -32,6 +32,12 @@ namespace Task03
                     return _arr[index];
                 else throw new IndexOutOfRangeException();
             }
+            set
+            {
+                if (index < _realLength)
+                    _arr[index] = value;
+                else throw new IndexOutOfRangeException();
+            }
         }
 
         public DynamicArray()
