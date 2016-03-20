@@ -1,4 +1,4 @@
-﻿SELECT Northwind.Orders.OrderID FROM Northwind.Orders 
+﻿SELECT Northwind.Orders.OrderID FROM Northwind.Orders
 WHERE ShippedDate >= '1998-5-6' AND ShipVia > = 2
 
 SELECT Northwind.Orders.OrderID, 

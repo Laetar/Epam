@@ -13,3 +13,5 @@ AS
 GO
 
 EXEC Northwind.ShippedOrdersDiff 10;
+
+select OrderID, CustomerID,EmployeeID,OrderDate,ShippedDate from Northwind.Orders
