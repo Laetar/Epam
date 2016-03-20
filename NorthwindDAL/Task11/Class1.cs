@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace Task11
 {
     public class DAL : IDAL
     {
-        string ConnectionString = @"Data Source=(localdb)\ProjectsV12;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string ConnectionString = @"Data Source=(localdb)\ProjectsV12;Database=Northwind;Integrated Security=True;";
 
         public IEnumerable<OrderClass> ViewOrders()
         {
@@ -17,8 +18,9 @@ namespace Task11
 
             using (var connection = new SqlConnection(ConnectionString))
             {
-                var command = new SqlCommand(
-                    "select OrderID, CustomerID,EmployeeID,OrderDate,ShippedDate from Northwind.Orders", connection);
+                var command = connection.CreateCommand();
+                command.CommandText = "select OrderID, CustomerID,EmployeeID,OrderDate,ShippedDate from Northwind.Orders";
+                command.CommandType = CommandType.Text; ;
                 connection.Open();
 
                 using (var reader = command.ExecuteReader())
@@ -30,11 +32,12 @@ namespace Task11
                         Order.OrderID = reader.GetInt32(0);
                         Order.CustomerID = reader.GetString(1);
                         Order.EmployeeID = reader.GetInt32(2);
-                        if (reader.GetDateTime(3) == null)
+                        //Order.ShippedDate = reader.GetSqlDateTime(4).ToString();
+                        if (reader.GetSqlDateTime(3).ToString() == "Null")
                         {
                             Order.OrderStatus = OrderClass.Status.New;
                         }
-                        else if(reader.GetDateTime(4) == null)
+                        else if (reader.GetSqlDateTime(4).ToString() == "Null")
                         {
                             Order.OrderStatus = OrderClass.Status.InWork;
                         }
@@ -56,10 +59,10 @@ namespace Task11
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(
-                    "select O.OrderID, O.CustomerID,O.EmployeeID,OrderDate,"+
-                     "ShippedDate,ProductName,OD.UnitPrice,Quantity,Discount from Northwind.Orders O" +
-                     "INNER JOIN Northwind.[Order Details] OD ON O.OrderID = OD.OrderID" +
-                     "INNER JOIN Northwind.Products P ON OD.ProductID = P.ProductID", connection);
+                    "select Northwind.Orders.OrderID, Northwind.Orders.CustomerID,Northwind.Orders.EmployeeID,OrderDate," +
+                     "ShippedDate,ProductName,Northwind.[Order Details].UnitPrice,Quantity,Discount from Northwind.Orders " +
+                     "INNER JOIN Northwind.[Order Details] ON Northwind.Orders.OrderID = Northwind.[Order Details].OrderID " +
+                     "INNER JOIN Northwind.Products ON Northwind.[Order Details].ProductID = Northwind.Products.ProductID", connection);
                 connection.Open();
 
                 using (var reader = command.ExecuteReader())
@@ -72,20 +75,22 @@ namespace Task11
                             Order.OrderID = reader.GetInt32(0);
                             Order.CustomerID = reader.GetString(1);
                             Order.EmployeeID = reader.GetInt32(2);
-                            if (reader.GetDateTime(3) == null)
+                            if (reader.GetSqlDateTime(3).ToString() == "Null")
                             {
                                 Order.OrderStatus = OrderClass.Status.New;
                             }
-                            else if (reader.GetDateTime(4) == null)
+                            else if (reader.GetSqlDateTime(4).ToString() == "Null")
                             {
+                                Order.OrderDate = reader.GetDateTime(3);
                                 Order.OrderStatus = OrderClass.Status.InWork;
                             }
                             else
                             {
+                                Order.ShippedDate = reader.GetDateTime(4);
                                 Order.OrderStatus = OrderClass.Status.Compl;
                             }
                             Order.ProductName = Order.ProductName + reader.GetString(5);
-                            Order.Price = reader.GetInt32(6) * reader.GetInt32(7) - reader.GetInt32(6) * reader.GetInt32(7) * reader.GetInt32(8);
+                            Order.Price = (double)reader.GetSqlMoney(6).ToSqlInt32() * reader.GetInt16(7) - (double)reader.GetSqlMoney(6).ToSqlInt32() * reader.GetInt16(7) * (double)reader.GetSqlSingle(8).ToSqlDouble();
                         }
                     }
                 }
@@ -98,12 +103,9 @@ namespace Task11
             using (var connection = new SqlConnection(ConnectionString))
             {
                 var command = new SqlCommand(
-                    "insert into Northwind.Orders (OrderID, OrderDate, ShippedDate) values(@OrderID, @OrderDate, @ShippedDate)", connection);
+                    "SET IDENTITY_INSERT Northwind.Orders ON insert into Northwind.Orders (OrderID) values(@OrderID) SET IDENTITY_INSERT Northwind.Orders OFF ", connection);
 
                 command.Parameters.AddWithValue("@OrderID", Order.OrderID);
-                command.Parameters.AddWithValue("@OrderDate", Order.OrderDate);
-                command.Parameters.AddWithValue("@ShippedDate", Order.ShippedDate);
-
                 connection.Open();
 
                 return command.ExecuteNonQuery() == 1;

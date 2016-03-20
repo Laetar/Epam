@@ -16,7 +16,7 @@ namespace Task11
         public int EmployeeID { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShippedDate { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
         public string ProductName { get; set; }
         public Status OrderStatus { get; set; }
 

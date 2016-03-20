@@ -19,9 +19,32 @@ namespace DALModulTest
         [TestMethod]
         public void TestGetOrdersById()
         {
-            var TestOrder = NewDal.GetOrdersById(1223);
+            var TestOrder = NewDal.GetOrdersById(11039);
         }
-        
-        //Не смог найти решение проблемы. Ридер не видет таблицу Orders
+
+        [TestMethod]
+        public void TestAddOrder()
+        {
+            OrderClass Order = new OrderClass();
+            Order.OrderID = 10000;
+            NewDal.AddOrder(Order);
+        }
+
+        [TestMethod]
+        public void ChangeOrderDate()
+        {
+            DateTime OrderDate = new DateTime();
+            OrderDate = DateTime.Now;
+            NewDal.ChangeOrderDate(OrderDate);
+        }
+
+        [TestMethod]
+        public void ChangeShippedDate()
+        {
+            DateTime OrderDate = new DateTime();
+            OrderDate = DateTime.Now;
+            NewDal.ChangeShippedDate(OrderDate);
+        }
+
     }
 }
