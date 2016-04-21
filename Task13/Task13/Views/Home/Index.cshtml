@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>GetOrders</h2>
+
+<p>
+    @using (Html.BeginForm("OrdersView", "Home"))
+    {
+        <input type="submit" class="MyButton" value="Get Orders"/>
+    }
+</p>
+
+<p>
+    @using (Html.BeginForm("AddNewOrder", "Home"))
+    {
+        <input type="submit" class="MyButton" value="Add new order" />
+    }
+</p>

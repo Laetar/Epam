@@ -20,3 +20,5 @@ AS
 GO
 
 EXEC Northwind.GreatestOrders1 '1997',5000;
+
+SELECT OrderID FROM Northwind.Orders WHERE OrderID = (SELECT MAX(OrderID) FROM Northwind.Orders)

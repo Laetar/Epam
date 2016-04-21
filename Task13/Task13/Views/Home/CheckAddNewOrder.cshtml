@@ -1,0 +1,28 @@
+﻿@model int
+@{
+    ViewBag.Title = "CheckAddNewOrder";
+}
+
+<div>
+    @if (Model == 0)
+    {
+        <p> Во время добавления произошла ошибка </p>
+    }
+    else
+    {
+        <p><h3>Добавление заказа завершено, ваш номер идентификации :</h3>  <h3>@Model</h3> </p>
+    }
+
+
+    @using (Html.BeginForm("AddDetails", "Home", new { id = Model }, FormMethod.Post))
+    {
+        <input type="submit" class="MyButton" value="Add Details" />
+    }
+
+    @using (Html.BeginForm("Index", "Home"))
+    {
+        <input type="submit" class="MyButton" value="Back" />
+    }
+
+</div>
+

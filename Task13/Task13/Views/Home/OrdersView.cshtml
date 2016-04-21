@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Task11.OrderClass>
+
+@{
+    ViewBag.Title = "OrdersView";
+}
+<h2>OrdersView</h2>
+<table border="1">
+    <caption>Заказы</caption>
+    <tr>
+        <th>OrderID</th>
+        <th>OrderDate</th>
+        <th>Freight</th>
+        <th>OrderStatus</th>
+        <th>Order Details</th>
+    </tr>
+    @foreach (Task11.OrderClass element in Model)
+    {
+         <tr>
+             <td>@element.OrderID</td>
+             <td>@element.OrderDate</td>
+             <td>@element.Freight</td>
+             <td>@element.OrderStatus</td>
+             <td>@using (Html.BeginForm("OrdersDetails", "Home", new { id = element.OrderID }, FormMethod.Post)) { <input type = "submit" name = "Order Details" value = "Order Details" /> }</td>
+         </tr>
+    }
+</table>

@@ -17,11 +17,27 @@ namespace Task11
         public DateTime OrderDate { get; set; }
         public DateTime ShippedDate { get; set; }
         public double Price { get; set; }
-        public string ProductName { get; set; }
+        public List<string> ProductsName { get; set; }
         public Status OrderStatus { get; set; }
+        public int Freight { get; set; }
+        public DateTime RequiredDate { get; set; }
+        public int ShipVia { get; set; }
+        public string ShipName { get; set; }
+        public string ShipAddress { get; set; }
+        public string ShipCity { get; set; }
+        public string ShipRegion { get; set; }
+        public string ShipPostalCode { get; set; }
+        public string ShipCountry { get; set; }
 
-        public OrderClass() { OrderID = 0; }
+        public OrderClass() { OrderID = 0; ProductsName = new List<string>(); }
 
 
+    }
+
+    public class NewOrderClass
+    {
+        public int Freight { get; set; }
+        public DateTime OrderDate { get; set; }
+        public DateTime ShippedDate { get; set; }
     }
 }

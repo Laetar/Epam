@@ -10,7 +10,7 @@ namespace Task11
     {
         IEnumerable<OrderClass> ViewOrders();
         OrderClass GetOrdersById(int id);
-        bool AddOrder(OrderClass Order);
+        int AddOrder(NewOrderClass Order);
         bool ChangeOrderDate(DateTime OrderDate);
         bool ChangeShippedDate(DateTime ShippedDate);
     }

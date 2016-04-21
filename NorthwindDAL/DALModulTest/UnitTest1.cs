@@ -13,16 +13,16 @@ namespace DALModulTest
         [TestMethod]
         public void TestViewOrders()
         {
-            var TestList = NewDal.ViewOrders();
+            var TestList = NewDal.GetAll();
         }
 
-        [TestMethod]
-        public void TestGetOrdersById()
-        {
-            var TestOrder = NewDal.GetOrdersById(11039);
-        }
+        //[TestMethod]
+        //public void TestGetOrdersById()
+        //{
+           // var TestOrder = NewDal.GetOrdersById(11039);
+       // }
 
-        [TestMethod]
+        /*[TestMethod]
         public void TestAddOrder()
         {
             OrderClass Order = new OrderClass();
@@ -44,7 +44,7 @@ namespace DALModulTest
             DateTime OrderDate = new DateTime();
             OrderDate = DateTime.Now;
             NewDal.ChangeShippedDate(OrderDate);
-        }
+        }*/
 
     }
 }

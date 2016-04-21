@@ -1,0 +1,72 @@
+﻿@model Task11.OrderClass
+@{
+    ViewBag.Title = "OrdersDetails";
+}
+<h1>OrderID: @Model.OrderID</h1>
+
+<div>
+    CustomerID: @Model.CustomerID
+    <br />
+    EmployeeID: @Model.EmployeeID
+    <br />
+    @if (Model.OrderDate == DateTime.MinValue) {
+        <text> OrderDate: NULL </text>
+    }
+    else
+    {
+        <text> OrderDate: @Model.OrderDate  </text>
+    }
+    <br />
+    @if (Model.ShippedDate == DateTime.MinValue)
+    {
+        <text> ShippedDate: NULL </text>
+    }
+    else
+    {
+        <text> ShippedDate: @Model.ShippedDate  </text>
+    }
+    <br />
+   @if (Model.RequiredDate == DateTime.MinValue)
+   {
+    <text> RequiredDate: NULL </text>
+   }
+   else
+   {
+    <text> RequiredDate: @Model.RequiredDate  </text>
+   }
+    <br />
+    Price: @Model.Price
+    <br />
+    OrderStatus: @Model.OrderStatus
+    <br />
+    ShipAddress: @Model.ShipAddress
+    <br />
+    ShipCity: @Model.ShipCity
+    <br />
+    ShipCountry: @Model.ShipCountry
+    <br />
+    ShipName: @Model.ShipName
+    <br />
+    ShipPostalCode: @Model.ShipPostalCode
+    <br />
+    ShipRegion: @Model.ShipRegion
+    <br />
+    ShipVia: @Model.ShipVia
+    <br />
+    <table border="1">
+        @{ int id = 1;}
+        <caption>Products</caption>
+        @foreach (string elm in Model.ProductsName)
+        {
+            <tr>
+                <td>@id:</td>
+                <td>@elm</td>
+                @{ id++;}
+            </tr>
+                    }
+    </table>
+    @using (Html.BeginForm("AddDetails", "Home", new { id = Model.OrderID }, FormMethod.Post))
+    {
+        <input type="submit" class="MyButton" value="Add/Change Details" />
+    }
+</div>

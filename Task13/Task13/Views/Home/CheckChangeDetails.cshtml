@@ -1,0 +1,27 @@
+﻿@model int
+@{
+    ViewBag.Title = "CheckChangeDetails";
+}
+
+<h2>CheckChangeDetails</h2>
+
+<div>
+    @if (Model != 0)
+    {
+        <h3>Изменение прошло успешно</h3>
+    }
+    else
+    {
+        <h3>Во время изменения произошла ошибка</h3>
+    }
+
+    @using (Html.BeginForm("AddDetails", "Home", new { id = Model }, FormMethod.Post))
+    {
+        <input type="submit" class="MyButton" value="Add More Details" />
+    }
+
+    @using (Html.BeginForm("Index", "Home"))
+    {
+        <input type="submit" class="MyButton" value="Back" />
+    }
+</div>

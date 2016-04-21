@@ -1,0 +1,94 @@
+﻿@model Task13.Controllers.OrderChangeViewModel
+@{
+    ViewBag.Title = "AddDetails";
+}
+
+<div>
+        <h2>Добавление/Изменение деталей Заказа номер @Model.OrderID</h2>
+        <br />
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "OrderDate", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                OrderDate:@Html.TextBoxFor(x => x.ColumnValue, new { type = "date", min = "1996-01-01" })
+                <input type="submit" name="submit"  />
+            </p>
+        }
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "RequiredDate", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                RequiredDate:@Html.TextBoxFor(x => x.ColumnValue, new { type = "date", min = "1996-01-01" })
+                <input type="submit" name="submit"/>
+            </p>
+        }
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "ShippedDate", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                ShippedDate:@Html.TextBoxFor(x => x.ColumnValue, new { type = "date", min = "1996-01-01" })
+                <input type="submit" name="submit" />
+            </p>
+        }
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "ShipVia", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                ShipVia:@Html.TextBoxFor(x => x.ColumnValue, new { onkeypress = "return event.charCode >= 48 && event.charCode <= 57" })
+                <input type="submit" name="submit" />
+            </p>
+        }
+
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "Freight", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                Freight:@Html.TextBoxFor(x => x.ColumnValue, new { onkeypress = "return event.charCode >= 48 && event.charCode <= 57" })
+                <input type="submit" name="submit" />
+            </p>
+        }
+
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "ShipName", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                ShipName:@Html.TextBoxFor(x => x.ColumnValue)                
+                <input type="submit" name="submit" />
+            </p>
+        }
+
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "ShipAddress", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                ShipAddress:@Html.TextBoxFor(x => x.ColumnValue)               
+                <input type="submit" name="submit" />
+            </p>
+        }
+
+        @using (@Html.BeginForm("ChangeDetails", "Home",new { ColumnName = "ShipCity", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                ShipCity:@Html.TextBoxFor(Model => Model.ColumnValue)  
+                <input type="submit" name="submit" />
+            </p>
+        }
+
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "ShipRegion", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                ShipRegion:@Html.TextBoxFor(x => x.ColumnValue)          
+                <input type="submit" name="submit"/>
+            </p>
+        }
+
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "ShipPostalCode", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                ShipPostalCode:@Html.TextBoxFor(x => x.ColumnValue)           
+                <input type="submit" name="submit" />
+            </p>
+        }
+
+        @using (@Html.BeginForm("ChangeDetails", "Home", new { ColumnName = "ShipCountry", OrderID = Model.OrderID }, FormMethod.Post))
+        {
+            <p>
+                ShipCountry:@Html.TextBoxFor(x => x.ColumnValue)           
+                <input type="submit" name="submit"/>
+            </p>
+        }
+</div>
+

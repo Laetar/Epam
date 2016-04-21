@@ -1,0 +1,26 @@
+﻿@model Task11.NewOrderClass
+@{
+    ViewBag.Title = "AddNewOrder";
+}
+
+<h2>AddNewOrder</h2>
+
+@using (Html.BeginForm("CheckAddNewOrder","Home",FormMethod.Post))
+{
+    <p>
+        Order Date:
+        @Html.TextBoxFor(x => x.OrderDate, new { type = "date", min = "1996-01-01" })
+
+    </p>
+    <p>
+        ShippedDate:
+        @Html.TextBoxFor(x => x.ShippedDate, new { type = "date", min = "1996-01-01" })
+    </p>
+
+    <p>
+        Freight:
+        @Html.TextBoxFor(x => x.Freight, new { onkeypress = "return event.charCode >= 48 && event.charCode <= 57" })
+    </p>
+    <br />
+    <input type="submit" name="submit" class="MyButton" />
+}
