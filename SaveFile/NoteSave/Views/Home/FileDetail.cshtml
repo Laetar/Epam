@@ -1,0 +1,55 @@
+﻿@model DAL.FileModel
+@{
+    ViewBag.Title = "FileDetail";
+}
+
+<h2>FileDetail</h2>
+
+<table border="2">
+    <caption>@Model.FileName</caption>
+    <tr>
+        <th>UploadTime:</th>
+        <th>@Model.UploadTime</th>
+    </tr>
+    <tr>
+        <th>Grade:</th>
+        <th>@Model.Grade</th>
+        @if (User.IsInRole("User"))
+        {
+            <th>
+                @using (Html.BeginForm("FileDetail","Home", FormMethod.Post))
+                {
+                    <input type="hidden" value="true" name="type" />
+                    <input type="submit" name="+" value="+" />
+                }
+                @using (Html.BeginForm("FileDetail", "Home", FormMethod.Post))
+                {
+                    <input type="hidden" value="false" name="type" />
+                    <input type="submit" name="-" value="-" />
+                }
+            </th>
+        }
+    </tr>
+    <tr>
+        <th>Tags:</th>
+        <th>
+            @foreach (string el in Model.Tags)
+            {
+                @el
+            }
+        </th>
+    </tr>
+
+</table>
+
+@using (Html.BeginForm("AddTag", "Home", FormMethod.Post))
+{
+    <label for="comment">Введите теги через запятую:</label>
+    <textarea class="form-control" rows="5" id="tags" name="tags"></textarea>
+    <input type="hidden" value=@Model.FileID name="id" />
+    <input type="submit" value="Add Tags" />
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{ <input type="submit" value="BACK" /> }
+

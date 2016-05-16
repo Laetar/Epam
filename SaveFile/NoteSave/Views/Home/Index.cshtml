@@ -1,0 +1,31 @@
+﻿@model List<DAL.FileModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>ViewFiles</h2>
+
+<table border="1">
+    <caption>Files</caption>
+    <tr>
+        <th>FileName</th>
+        <th>UploadTime</th>
+        <td>Rate</td>
+    </tr>
+    @foreach (DAL.FileModel element in Model)
+    {
+        <tr>
+            <td>@element.FileName</td>
+            <td>@element.UploadTime</td>
+            <td>@element.Grade</td>
+            <td>
+                @using (Html.BeginForm("FileDetail", "Home", new { id = element.FileID },FormMethod.Get))
+                {<input type="submit" value="Detail" /> }
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    @using (Html.BeginForm("SearchFile", "Home"))
+        { <input type="submit" value="SEARCH" /> }
+</div>

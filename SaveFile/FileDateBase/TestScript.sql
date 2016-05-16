@@ -1,0 +1,1 @@
+﻿SELECT UserId FROM dbo.GradeTable WHERE FileId = 7 AND UserId = 5

@@ -1,0 +1,13 @@
+﻿.UserName {
+    position: relative;
+    color: white;
+    font-size:25px;
+    font-family:Impact;
+    float: right;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
