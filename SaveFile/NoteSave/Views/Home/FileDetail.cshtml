@@ -45,8 +45,8 @@
 @using (Html.BeginForm("AddTag", "Home", FormMethod.Post))
 {
     <label for="comment">Введите теги через запятую:</label>
-    <textarea class="form-control" rows="5" id="tags" name="tags"></textarea>
-    <input type="hidden" value=@Model.FileID name="id" />
+    <textarea class="form-control" rows="5" id="tags" name="tags" placeholder="Теги..."></textarea>
+    <input type="hidden" value=@Model.FileID name="id"  />
     <input type="submit" value="Add Tags" />
 }
 
