@@ -12,9 +12,9 @@ namespace DAL
         FileModel GetFile(int id);
         bool DeleteFile(int id);
         string ReadFile(int id);
-        bool AddTag(List<string> tag, int id); 
+        bool AddTag(string tags, int id); 
         bool DelTag(string tag, int id);
-        List<int> SearchFile(List<string> tagList); 
+        List<FileModel> SearchFile(string tags); 
         bool GradeFile(bool grade, int id, string userName);
         List<FileModel> ViewFiles();
     }

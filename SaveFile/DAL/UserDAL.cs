@@ -9,11 +9,16 @@ namespace DAL
 {
     public class UserDAL
     {
-        string ConnectionString = @"Data Source=(localdb)\ProjectsV12;Database=FileDateBase;Integrated Security=True;";
+        private string _connectionString = "null";
+
+        public UserDAL(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
 
         public int GetUserId(string userName)
         {
-            using (var connection = new SqlConnection(ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 var command = new SqlCommand("SELECT UserId FROM UserTable WHERE UserName = @UserName", connection);
                 command.Parameters.AddWithValue("@UserName", userName);
@@ -24,7 +29,7 @@ namespace DAL
 
         public bool CheckUser(string name, string pass)
         {
-            using (var connection = new SqlConnection(ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 var command = new SqlCommand("SELECT UserId FROM UserTable WHERE UserName = @UserName AND UserPassword = @UserPassword", connection);
                 command.Parameters.AddWithValue("@UserName", name);
@@ -39,7 +44,7 @@ namespace DAL
 
         public bool RegistrationUser(string name, string pass)
         {
-            using (var connection = new SqlConnection(ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 try {
                     var command = new SqlCommand("INSERT INTO dbo.UserTable (UserName,UserPassword) VALUES (@UserName,@UserPassword)", connection);

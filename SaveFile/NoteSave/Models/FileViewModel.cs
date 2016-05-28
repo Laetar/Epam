@@ -10,10 +10,11 @@ namespace NoteSave.Models
     {
         [Required(ErrorMessage = "select the download file")]
         public HttpPostedFileBase File { get; set; }
-        [StringLength(20)]
+        [StringLength(20,ErrorMessage = "Too long name")]
         public string FileName { get; set; }
         public int FileID { get; set; }
         public DateTime UploadTime { get; set; }
         public int Grade { get; set; }
+        public string Error { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "FileDetail";
 }
-
+@Html.Partial("~/Views/Shared/_SignInPage.cshtml");
 <h2>FileDetail</h2>
 
 <table border="2">
@@ -48,6 +48,12 @@
     <textarea class="form-control" rows="5" id="tags" name="tags" placeholder="Теги..."></textarea>
     <input type="hidden" value=@Model.FileID name="id"  />
     <input type="submit" value="Add Tags" />
+}
+
+@using (Html.BeginForm("DownloadFile", "File"))
+{ 
+    <input type="submit" value="Download" />
+    <input type="hidden" value=@Model.FileID name="id" />
 }
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))

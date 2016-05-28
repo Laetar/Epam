@@ -67,7 +67,4 @@
   <ItemGroup>
     <RefactorLog Include="FileDateBase.refactorlog" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="TestScript.sql" />
-  </ItemGroup>
 </Project>

@@ -1,0 +1,22 @@
+﻿@if (!User.Identity.IsAuthenticated)
+{
+    <div class="SignIn">
+
+        @using (Html.BeginForm("LogIn", "Account",FormMethod.Get))
+        {
+            <input type="submit" name="LogIn" value="LogIn" />
+        }
+        @using (Html.BeginForm("Registration", "Account", FormMethod.Get))
+        {
+            <input type="submit" name="SignIn" value="SignIn" />
+        }
+    </div>
+}else
+{
+    <div class="SignIn">
+        @using (Html.BeginForm("LogOut", "Account", FormMethod.Get))
+        {
+            <input type="submit" name="LogOut" value="LogOut" />
+        }
+    </div>
+}

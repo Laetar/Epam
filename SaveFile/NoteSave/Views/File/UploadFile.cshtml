@@ -3,14 +3,18 @@
     ViewBag.Title = "UploadFile";
 }
 
+@Html.Partial("~/Views/Shared/_SignInPage.cshtml");
+
 @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div>
         @Html.LabelFor(x => x.File)
-        @Html.TextBoxFor(x => x.File, new { type = "file" })
+        @Html.TextBoxFor(x => x.File, new { type = "file", accept = ".txt,.doc,.docx" })
         @Html.ValidationMessageFor(x => x.File)
     </div>
-
     <button type="submit">Upload</button>
 }
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{ <input type="submit" value="BACK" /> }
 

@@ -3,7 +3,17 @@
     ViewBag.Title = "Index";
 }
 
+@Html.Partial("~/Views/Shared/_SignInPage.cshtml");
+
 <h2>ViewFiles</h2>
+
+@using (Html.BeginForm("FileSearch","Home",FormMethod.Get))
+{
+    <p class="nopm">
+        <input type="text" name="tags" placeholder="Search Keywords" class="stdinput" size="50" maxlength="200">
+        <input type="submit" name="Search_subbmit" value="Search Tag" class="stdbtn">
+    </p>
+}
 
 <table border="1">
     <caption>Files</caption>
@@ -19,13 +29,14 @@
             <td>@element.UploadTime</td>
             <td>@element.Grade</td>
             <td>
-                @using (Html.BeginForm("FileDetail", "Home", new { id = element.FileID },FormMethod.Get))
+                @using (Html.BeginForm("FileDetail", "Home", new { id = element.FileID }, FormMethod.Get))
                 {<input type="submit" value="Detail" /> }
             </td>
         </tr>
-    }
+        }
 </table>
 <div>
-    @using (Html.BeginForm("SearchFile", "Home"))
-        { <input type="submit" value="SEARCH" /> }
+    @using (Html.BeginForm("UploadFile", "File"))
+    { <input type="submit" value="UploadFile" /> }
 </div>
+

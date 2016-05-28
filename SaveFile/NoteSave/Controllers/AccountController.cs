@@ -12,12 +12,17 @@ namespace NoteSave.Controllers
     public class AccountController : Controller
     {
 
-        UserDAL myUserDAL = new UserDAL();
+        UserDAL myUserDAL = new UserDAL(ConnectionString.GetConnectionString());
 
-        // GET: LogIn
-        public ActionResult Index()
+        public ActionResult LogOut()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                int userId = myUserDAL.GetUserId(User.Identity.Name);
+                Request.Cookies.Remove(userId.ToString());
+                FormsAuthentication.SignOut();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         #region LogIn
