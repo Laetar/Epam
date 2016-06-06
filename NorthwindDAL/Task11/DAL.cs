@@ -183,6 +183,7 @@ namespace Task11
                     command.Parameters.AddWithValue("@columnValue", _date);
                 }
                 else command.Parameters.AddWithValue("@columnValue", columnValue);
+
                 connection.Open();
 
                 if (command.ExecuteNonQuery() == 1) return id;
