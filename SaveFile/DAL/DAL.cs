@@ -237,7 +237,7 @@ namespace DAL
             FileModel result = new FileModel();
             using (var connection = new SqlConnection(_connectionString))
             {
-                var command = new SqlCommand("SELECT FileId,[File],UploadTime,Grade,FileName FROM dbo.FileTable WHERE FileId = @FileId", connection);
+                var command = new SqlCommand("SELECT FileId,[File],UploadTime,FileName FROM dbo.FileTable WHERE FileId = @FileId", connection);
                 command.Parameters.AddWithValue("@FileId", id);
                 connection.Open();
                 using (var reader = command.ExecuteReader())
@@ -247,7 +247,7 @@ namespace DAL
                         result.FileID = reader.GetInt32(0);
                         result.File = (byte[])reader.GetValue(1);
                         result.UploadTime = reader.GetDateTime(2);
-                        result.FileName = reader.GetString(4);
+                        result.FileName = reader.GetString(3);
                     }
                 }
                 result.Grade = GetGrade(result.FileID);
